@@ -1,0 +1,19 @@
+
+#color{
+
+    color: black;
+}
+
+
+p{
+    color:black;
+    justify-content: center;
+}
+
+h2{
+    color:#FF0000;
+}
+form{
+    text-align: center;
+    border: 2px solid black;
+}
