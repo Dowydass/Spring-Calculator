@@ -1,7 +1,11 @@
 package com.hellow.demo.controller;
 
 
-import com.hellow.demo.Number;
+import com.hellow.demo.model.Number;
+import com.hellow.demo.service.NumberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -13,21 +17,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import javax.validation.Valid;
-import java.net.BindException;
 import java.util.HashMap;
 
 @Controller
+@EnableAutoConfiguration
+public class CalculatorController {
 
-public class HelloController {
+    // @Autowired
+
+
+   // @Qualifier("NumberService")
+    public NumberService numberService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String home(Model model) {
+
         model.addAttribute("number", new Number());
+
         System.out.println(model);
+
         return "index";
     }
 
-   // @RequestMapping(method = RequestMethod.GET, value = "/test")
+
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/skaiciuoti")
@@ -42,14 +54,11 @@ public class HelloController {
         String zenklas = skaiciai.get("zenklas");
 
 
-        double rezultatas;
 
-        modelMap.put("sk1", sk1);
-        modelMap.put("sk2", sk2);
-        modelMap.put("zenklas", zenklas);
 
-        System.out.println(sk1 + zenklas + sk2);
 
+
+/*
         switch (zenklas) {
             case "+":
                 rezultatas = sk1 + sk2;
@@ -69,7 +78,27 @@ public class HelloController {
                 return "skaiciuoti";
             default:
                 return "index";
-
         }
+ */        int rezultatas =0;
+        if (zenklas.equals("+")) {
+            rezultatas = sk1 + sk2;
+        } else if (zenklas.equals("-")) {
+            rezultatas = sk1 - sk2;
+        } else if (zenklas.equals("*")) {
+            rezultatas = sk1 * sk2;
+        } else if (zenklas.equals("/")) {
+            rezultatas = sk1 / sk2;
+        }
+
+        modelMap.put("sk1", sk1);
+        modelMap.put("sk2", sk2);
+        modelMap.put("zenklas", zenklas);
+        modelMap.put("rezultatas", rezultatas);
+
+
+        System.out.println(sk1 + zenklas + sk2 );
+
+
+        return "skaiciuoti";
     }
 }
