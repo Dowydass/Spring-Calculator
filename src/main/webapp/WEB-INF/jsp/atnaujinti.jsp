@@ -4,7 +4,7 @@
 
 <%--
   Created by IntelliJ IDEA.
-  User: Dovyd
+  User: Dovydas
   Date: 4/5/2021
   Time: 9:03 PM
   To change this template use File | Settings | File Templates.
@@ -13,9 +13,17 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Test</title>
+    <title>Atnaujinimas</title>
+    <jsp:include page="header.jsp"/>
 </head>
 <body>
-<h4>hi</h4>
+<<form:form name="skaicius" action="/atnaujintiSkaiciu" method="post">
+
+    <input type="hidden" name="id" value="${skaicius.id}">
+    Pirmas skaicius: <br>
+    <input type="number" name="sk1" value="${skaicius.sk1}">
+    Pirmas skaicius: <br>
+
+</form:form>
 </body>
 </html>

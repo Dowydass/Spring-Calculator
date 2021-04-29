@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
-
+import javax.jws.WebParam;
 import javax.validation.Valid;
 import java.util.HashMap;
 
@@ -23,22 +24,50 @@ import java.util.HashMap;
 @EnableAutoConfiguration
 public class CalculatorController {
 
-    // @Autowired
+    @Autowired
 
 
-   // @Qualifier("NumberService")
+    @Qualifier("NumberService")
     public NumberService numberService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String home(Model model) {
 
         model.addAttribute("number", new Number());
-
         System.out.println(model);
-
         return "index";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/skaiciai")
+    public String getAllNumbers(Model model) {
+        model.addAttribute("skaiciai", numberService.getAll());
+        return "skaiciai";
+    }
+
+        @RequestMapping(method = RequestMethod.GET, value = "/rodyti{id}")
+        public String getbyId(@RequestParam("id") int id, Model model) {
+            model.addAttribute("skaicius", numberService.getById(id));
+            return "skaicius";
+        }
+
+        @RequestMapping(method = RequestMethod.GET, value = "/trinti{id}")
+        public String delete(@RequestParam("id") int id, Model model){
+            numberService.delete(id);
+            model.addAttribute("skaiciai", numberService.getAll());
+            return "skaiciai";
+        }
+
+        @RequestMapping(method = RequestMethod.GET, value = "/atnaujinti{id}")
+        public String update(@RequestParam("id") int id, Model model){
+            model.addAttribute("skaicius", numberService.getById(id));
+            return "atnaujinti";
+        }
+
+        @RequestMapping(method = RequestMethod.POST, value = "/atnaujintiSkaiciu")
+        public String updateNumber(@ModelAttribute("skaicius") Number number){
+            numberService.update(number);
+            return "redirect:/rodyti?id=" + number.getId();
+        }
 
 
 
@@ -48,57 +77,35 @@ public class CalculatorController {
 
         if (br.hasErrors()) {
             return "index";
-        }
-        int sk1 = Integer.parseInt(skaiciai.get("sk1"));
-        int sk2 = Integer.parseInt(skaiciai.get("sk2"));
-        String zenklas = skaiciai.get("zenklas");
+        } else {
+            int sk1 = Integer.parseInt(skaiciai.get("sk1"));
+            int sk2 = Integer.parseInt(skaiciai.get("sk2"));
+            String zenklas = skaiciai.get("zenklas");
 
+            int rezultatas = 0;
 
-
-
-
-
-/*
-        switch (zenklas) {
-            case "+":
+            if (zenklas.equals("+")) {
                 rezultatas = sk1 + sk2;
-                modelMap.put("rezultatas", rezultatas);
-                return "skaiciuoti";
-            case "-":
+            } else if (zenklas.equals("-")) {
                 rezultatas = sk1 - sk2;
-                modelMap.put("rezultatas", rezultatas);
-                return "skaiciuoti";
-            case "*":
+            } else if (zenklas.equals("*")) {
                 rezultatas = sk1 * sk2;
-                modelMap.put("rezultatas", rezultatas);
-                return "skaiciuoti";
-            case "/":
+            } else if (zenklas.equals("/")) {
                 rezultatas = sk1 / sk2;
-                modelMap.put("rezultatas", rezultatas);
-                return "skaiciuoti";
-            default:
-                return "index";
-        }
- */        int rezultatas =0;
-        if (zenklas.equals("+")) {
-            rezultatas = sk1 + sk2;
-        } else if (zenklas.equals("-")) {
-            rezultatas = sk1 - sk2;
-        } else if (zenklas.equals("*")) {
-            rezultatas = sk1 * sk2;
-        } else if (zenklas.equals("/")) {
-            rezultatas = sk1 / sk2;
+            }
+
+            modelMap.put("sk1", sk1);
+            modelMap.put("sk2", sk2);
+            modelMap.put("zenklas", zenklas);
+            modelMap.put("rezultatas", rezultatas);
+
+            numberService.save(new Number(sk1, sk2, zenklas, rezultatas));
+
+
+            System.out.println(sk1 + zenklas + sk2);
+            return "skaiciuoti";
         }
 
-        modelMap.put("sk1", sk1);
-        modelMap.put("sk2", sk2);
-        modelMap.put("zenklas", zenklas);
-        modelMap.put("rezultatas", rezultatas);
 
-
-        System.out.println(sk1 + zenklas + sk2 );
-
-
-        return "skaiciuoti";
     }
 }

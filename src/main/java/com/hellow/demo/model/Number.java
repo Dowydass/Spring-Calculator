@@ -31,8 +31,15 @@ public class Number {
     public Number() {
     }
 
-    public Number(int id, int sk1, int sk2, String zenklas, int rezult) {
+    public Number(int id,int sk1, int sk2, String zenklas, int rezult) {
         this.id = id;
+        this.sk1 = sk1;
+        this.sk2 = sk2;
+        this.zenklas = zenklas;
+        this.rezult = rezult;
+    }
+
+    public Number(int sk1, int sk2, String zenklas, int rezult) {
         this.sk1 = sk1;
         this.sk2 = sk2;
         this.zenklas = zenklas;
@@ -43,12 +50,13 @@ public class Number {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getSk1() {
         return sk1;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setSk1(int sk1) {

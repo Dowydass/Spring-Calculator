@@ -21,7 +21,6 @@ public class SpringConfig {
     @Bean
     @Qualifier("NumberService")
     public NumberService getNumberService() {
-
         return new NumberServiceImpl();
     }
 }

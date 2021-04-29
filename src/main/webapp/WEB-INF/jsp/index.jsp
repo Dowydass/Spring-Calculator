@@ -4,7 +4,7 @@
 
 <%--
   Created by IntelliJ IDEA.
-  User: Dovyd
+  User: Dovydas
   Date: 3/30/2021
   Time: 7:53 PM
   To change this template use File | Settings | File Templates.
@@ -16,6 +16,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Skaiciuotuvas</title>
+    <jsp:include page="header.jsp"/>
     <style>
         .error {
             color: red
@@ -63,7 +64,7 @@
             </select>
             </p>
                 <input  id = "color" type="submit" value="skaiciuoti">
-            <h4 class="text-center"><a href="${contextPath}/skaiciuoti">Test</a> </h4>
+
         </form>
 
     </form:form>
