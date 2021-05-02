@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 public class SpringConfig {
 
     @Bean
-
     @Qualifier("NumberDAO")
     public NumberDAO getNumberDAO() {
         return new NumberDAOImpl();

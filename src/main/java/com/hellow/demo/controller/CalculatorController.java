@@ -17,7 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.WebParam;
+
 import javax.validation.Valid;
 import java.util.HashMap;
 
@@ -25,13 +25,13 @@ import java.util.HashMap;
 @EnableAutoConfiguration
 public class CalculatorController {
 
-   // @Autowired
+    @Autowired
     private UserService userService;
 
-   // @Autowired
+    @Autowired
     private SecurityService securityService;
 
-    //@Autowired
+    @Autowired
     private UserValidator userValidator;
 
     //Autowired - naudojamas priklausomybiu injekcijai
@@ -43,13 +43,13 @@ public class CalculatorController {
 
     //Marsrutizavimo informacija. Siuo atveju ji nurodo Spring karkasui
 
-    //@RequestMapping(method = RequestMethod.GET, value = "/")
+
     @GetMapping({"/", "/skaiciuotuvas"})
    String home(Model model) {
 
         model.addAttribute("number", new Number());
         System.out.println(model);
-        return "index";
+        return "skaiciuotuvas";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/skaiciai")
@@ -94,7 +94,7 @@ public class CalculatorController {
 
         @PostMapping("/registruoti")
         public String registration(@ModelAttribute("userForm") User userForm,BindingResult bindingResult){
-        userValidator.validate(userForm,BindingResult);
+        userValidator.validate(userForm, bindingResult);
 
         if(bindingResult.hasErrors()){
             return "registruoti";
@@ -106,18 +106,17 @@ public class CalculatorController {
         return "redirect:/skaiciuotuvas";
         }
 
+
         @GetMapping("/prisijungti")
         public String login(Model model, String error, String logout){
-        if(error != null){
+        if(error != null)
             model.addAttribute("error", "Duomenys neteisingi");
-        }
-            if(logout != null){
+
+            if(logout != null)
                 model.addAttribute("message","atsijungta");
 
 
-                return "prisijungti";
-            }
-
+            return "prisijungti";
         }
 
     @RequestMapping(method = RequestMethod.POST, value = "/skaiciuoti")
@@ -125,7 +124,7 @@ public class CalculatorController {
                      @RequestParam HashMap<String, String> skaiciai, ModelMap modelMap) {
 
         if (br.hasErrors()) {
-            return "index";
+            return "skaiciuotuvas";
         } else {
             int sk1 = Integer.parseInt(skaiciai.get("sk1"));
             int sk2 = Integer.parseInt(skaiciai.get("sk2"));

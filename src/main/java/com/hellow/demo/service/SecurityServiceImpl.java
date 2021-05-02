@@ -23,7 +23,7 @@ public class SecurityServiceImpl implements  SecurityService{
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
     @Override
-    public  String findLoggedUsername(){
+    public  String findLoggedInUsername(){
         Object userDetails= SecurityContextHolder.getContext().getAuthentication().getDetails();
         if(userDetails instanceof UserDetails){
             return ((UserDetails)userDetails).getUsername();

@@ -19,44 +19,46 @@ public class User {
     @Transient
     private String passwordConfirm;
 
-
-
     @ManyToMany
     private Set<Role> roles;
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getUsername(){
+
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username){
+    public void setUsername(String username) {
         this.username = username;
     }
-     public String getPassword(){
+
+    public String getPassword() {
         return password;
-     }
+    }
 
-     public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = password;
-     }
-     public String getPasswordConfirm(){
+    }
+
+    public String getPasswordConfirm() {
         return passwordConfirm;
-     }
-     public void setPasswordConfirm(String passwordConfirm){
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
-     }
-     public Set<Role> getRoles(){
-     return roles;
-     }
-     public void setRoles(Set<Role> roles){
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
-     }
-
-
-
+    }
 }
