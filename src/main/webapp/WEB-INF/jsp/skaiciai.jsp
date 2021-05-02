@@ -13,6 +13,8 @@
 <head>
     <title>Skaiciai</title>
     <jsp:include page="header.jsp"/>
+    <jsp:include page="menu.jsp"/>
+
 </head>
 <body class="container">
 <div class="table-responsive">
@@ -27,14 +29,17 @@
 
         <c:forEach var="skaicius" items="${skaiciai}">
 
+            <!--Konstruoja iraso atnaujinimo adresa su skaiciaus id-->
             <c:url var="atnaujinti" value="/atnaujinti">
                 <c:param name="id" value="${skaicius.id}"/>
             </c:url>
 
+            <!--Konstruoja iraso trynimo adresa su skaiciaus id-->
             <c:url var="trinti" value="/trinti">
                 <c:param name="id" value="${skaicius.id}"/>
             </c:url>
 
+            <!--Konstruoja iraso trynimo adresa su skaiciaus id-->
             <c:url var="rodyti" value="/rodyti">
                 <c:param name="id" value="${skaicius.id}"/>
             </c:url>
@@ -47,7 +52,7 @@
                 <td>${skaicius.rezult}</td>
 
                 <td>
-                    <a href="${atnaujinti}" Keisti></a>
+                    <a href="${atnaujinti}">Keisti</a>
                     | <a href="${trinti}"
                          onclick="if(!(confirm('Ar tikrai norite istrinti si irasa?')))
                         return false">Trinti</a>
@@ -57,5 +62,6 @@
         </c:forEach>
     </table>
 </div>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

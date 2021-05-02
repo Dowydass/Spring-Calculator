@@ -15,15 +15,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Atnaujinimas</title>
     <jsp:include page="header.jsp"/>
+    <jsp:include page="menu.jsp"/>
 </head>
-<body>
-<<form:form name="skaicius" action="/atnaujintiSkaiciu" method="post">
+<body class="container">
+<form:form name="skaicius" action="/atnaujintiSkaiciu" method="post">
 
     <input type="hidden" name="id" value="${skaicius.id}">
+
     Pirmas skaicius: <br>
-    <input type="number" name="sk1" value="${skaicius.sk1}">
-    Pirmas skaicius: <br>
+    <input type="number" name="sk1" value="${skaicius.sk1}"><p>
+
+    Zenklas skaicius: <br>
+    <input type="text" name="zenklas" value="${skaicius.zenklas}"><p>
+
+    Antras skaicius: <br>
+    <input type="number" name="sk2" value="${skaicius.sk2}"><p>
+
+    Rezultatas: <br>
+    <input type="number" name="rezult" value="${skaicius.rezult}"><p>
+    <input type="submit" value="Atnaujinti">
 
 </form:form>
 </body>
+<jsp:include page="footer.jsp"/>
 </html>

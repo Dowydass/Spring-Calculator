@@ -10,21 +10,35 @@
 <head>
     <title>Skaicius</title>
     <jsp:include page="header.jsp"/>
+    <jsp:include page="footer.jsp"/>
 </head>
 <body class="container">
-    <div>
+    <div class="table-responsive">
         <caption>Skaiciaus informacija</caption>
-            <table>
+            <table class="table table-striped">
                 <Tr>
                     <td><b>Id:</b></td>
                     <td>${skaicius.id}</td>
                 </Tr>
                 <tr>
                     <td><b>Pirmas skaicius:</b></td>
-                    <td>${skaicius.id}</td>
+                    <td>${skaicius.sk1}</td>
                 </tr>
-
+                <tr>
+                    <td><b>Zenklas:</b></td>
+                    <td>${skaicius.zenklas}</td>
+                </tr>
+                <tr>
+                    <td><b>Antras skaicius:</b></td>
+                    <td>${skaicius.sk2}</td>
+                </tr>
+                <tr>
+                    <td><b>Rezultatas:</b></td>
+                    <td>${skaicius.rezult}</td>
+                </tr>
             </table>
     </div>
+<a type="button" href="/skaiciai" class="button">Atgal</a>
 </body>
+<jsp:include page="footer.jsp"/>
 </html>

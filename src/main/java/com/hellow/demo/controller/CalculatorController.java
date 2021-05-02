@@ -3,18 +3,19 @@ package com.hellow.demo.controller;
 
 import com.hellow.demo.model.Number;
 import com.hellow.demo.service.NumberService;
+import com.hellow.demo.service.SecurityService;
+import com.hellow.demo.service.UserService;
+import com.hellow.demo.model.User;
+import com.hellow.demo.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import javax.jws.WebParam;
 import javax.validation.Valid;
@@ -24,14 +25,27 @@ import java.util.HashMap;
 @EnableAutoConfiguration
 public class CalculatorController {
 
+   // @Autowired
+    private UserService userService;
+
+   // @Autowired
+    private SecurityService securityService;
+
+    //@Autowired
+    private UserValidator userValidator;
+
+    //Autowired - naudojamas priklausomybiu injekcijai
+    //Kad panaudoti @Autowired anotacija, reikia pirmiausiai tureti apsirasiusi @Bean @Configuration
+
     @Autowired
-
-
     @Qualifier("NumberService")
     public NumberService numberService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/")
-    public String home(Model model) {
+    //Marsrutizavimo informacija. Siuo atveju ji nurodo Spring karkasui
+
+    //@RequestMapping(method = RequestMethod.GET, value = "/")
+    @GetMapping({"/", "/skaiciuotuvas"})
+   String home(Model model) {
 
         model.addAttribute("number", new Number());
         System.out.println(model);
@@ -70,6 +84,41 @@ public class CalculatorController {
         }
 
 
+
+        @GetMapping("/registruoti")
+        public String registration(Model model){
+        model.addAttribute("userForm", new User());
+
+        return "registruoti";
+        }
+
+        @PostMapping("/registruoti")
+        public String registration(@ModelAttribute("userForm") User userForm,BindingResult bindingResult){
+        userValidator.validate(userForm,BindingResult);
+
+        if(bindingResult.hasErrors()){
+            return "registruoti";
+        }
+        userService.save(userForm);
+
+        securityService.autoLogin(userForm.getUsername(),userForm.getPasswordConfirm());
+
+        return "redirect:/skaiciuotuvas";
+        }
+
+        @GetMapping("/prisijungti")
+        public String login(Model model, String error, String logout){
+        if(error != null){
+            model.addAttribute("error", "Duomenys neteisingi");
+        }
+            if(logout != null){
+                model.addAttribute("message","atsijungta");
+
+
+                return "prisijungti";
+            }
+
+        }
 
     @RequestMapping(method = RequestMethod.POST, value = "/skaiciuoti")
     String skaciuoti(@Valid @ModelAttribute("number") Number e, BindingResult br,

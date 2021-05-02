@@ -17,6 +17,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Skaiciuotuvas</title>
     <jsp:include page="header.jsp"/>
+    <jsp:include page="menu.jsp"/>
     <style>
         .error {
             color: red
@@ -30,17 +31,11 @@
     <link href="${jstlCss}" rel="stylesheet" />
 
 </head>
-<body>
+<body class="container">
+<h2>Galimos operacijos: sudeti, atimti, dauginti, dalinti</h2>
+<h3>Skaiciuotuvas jautrus neigiamiems skaiciams ;)</h3>
 
 
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand">Spring Boot Home Page</a>
-        </div>
-
-    </div>
-</nav>
 <form method="post" action="skaiciuoti">
     <form  method="post" action="skaiciuoti">
 
@@ -61,8 +56,8 @@
                 <option value="*">Daugyba</option>
                 <option value="/">Dalyba</option>
 
-            </select>
-            </p>
+            </select> <br><br>
+
                 <input  id = "color" type="submit" value="skaiciuoti">
 
         </form>
@@ -71,4 +66,5 @@
     <script type="text/javascript" src="webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
 </body>
+<jsp:include page="footer.jsp"/>
 </html>
