@@ -45,7 +45,7 @@
             <div class="form-group ${status.error ? 'has-error' : ''}">
             <form:input type="password" path="passwordConfirm" class="form-control"
                         placeholder="Slaptazodzio patvirtinimas"></form:input>
-            <form:errors path="pa sswordConfirm"></form:errors>
+            <form:errors path="passwordConfirm"></form:errors>
             </div>
         </spring:bind>
 
