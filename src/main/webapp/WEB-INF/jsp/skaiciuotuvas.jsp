@@ -1,70 +1,37 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="form." uri="http://www.springframework.org/tags/form" %>
-
-<%--
-  Created by IntelliJ IDEA.
-  User: Dovydas
-  Date: 3/30/2021
-  Time: 7:53 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Skaiciuotuvas</title>
-    <jsp:include page="header.jsp"/>
-    <jsp:include page="menu.jsp"/>
-    <style>
-        .error {
-            color: red
-        }
-    </style>
-
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.6.0/css/bootstrap.min.css" />
     <spring:url value="/css/main.css" var="springCss" />
     <link href="${springCss}" rel="stylesheet" />
     <c:url value="/css/main.css" var="jstlCss" />
     <link href="${jstlCss}" rel="stylesheet" />
-
+    <title>Skaičiuotuvas</title>
+    <jsp:include page="header.jsp" />
+    <jsp:include page="menu.jsp"/>
+    <style>
+        .error{color:red}
+    </style>
 </head>
 <body class="container">
-<h2>Galimos operacijos: sudeti, atimti, dauginti, dalinti</h2>
-<h3>Skaiciuotuvas jautrus neigiamiems skaiciams ;)</h3>
-
-
-<form method="post" action="skaiciuoti">
-    <form  method="post" action="skaiciuoti">
-
-
-        <p>
-                                <form:form method="post" action="skaiciuoti" modelAttribute="number">
-                Pirmas skaicius:<form:input type="number" path="sk1"/>
-                                <form.:errors path="sk1" cssClass="error"/><br><br>
-                Antras skaicius:<form:input type="number" path="sk2"/>
-                                <form.:errors path="sk2" cssClass="error"/><br><br>
-
-
-
-            Operacinis zenklas:
-            <select name="zenklas">
-                <option selected="selected" value="+">Sudetis</option>
-                <option value="-">Atimtis</option>
-                <option value="*">Daugyba</option>
-                <option value="/">Dalyba</option>
-
-            </select> <br><br>
-
-                <input  id = "color" type="submit" value="skaiciuoti">
-
-        </form>
-
-    </form:form>
-    <script type="text/javascript" src="webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
-
+ <h2>Galimos operacijos: sudėti, atimti, dauginti, dalinti</h2>
+ <h3>Skaičiuotuvas jautrus neigiamiems skaičiams ;)</h3>
+ <form:form method="post" action="skaiciuoti" modelAttribute="number">
+    Pirmas skaičius: <form:input type="number" path="sk1"/>
+                     <form:errors path="sk1" cssClass="error"/><br>
+    Antras skaičius: <form:input type="number" name="sk2" path="sk2"/>
+                     <form:errors path="sk2" cssClass="error"/><br>
+    Operacijos ženklas:
+    <select name="zenklas">
+        <option selected="selected" value="+">Sudėtis</option>
+        <option value="-">Atimtis</option>
+        <option value="*">Daugyba</option>
+        <option value="/">Dalyba</option>
+    </select><br><br>
+    <input type="submit" value="skaičiuoti">
+</form:form>
 </body>
 <jsp:include page="footer.jsp"/>
 </html>

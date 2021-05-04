@@ -1,20 +1,17 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Dovydas
-  Date: 4/29/2021
-  Time: 2:44 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- Latest compiled and minified CSS -->
 <html>
+    <%--
+       Stiliai skirti kol kas prisijungimo ir registracijos langui, bet galima juos papildyti ir panaudoti
+       kituose puslapiuose, nes i visus itrauktas sis header failas
+       --%>
 <style>
-    body{
+    body {
         padding-top: 40px;
         padding-bottom: 40px;
         background-color: #eee;
     }
-    .form-signin{
+
+    .form-signin {
         max-width: 330px;
         padding: 15px;
         margin: 0 auto;
@@ -33,7 +30,6 @@
         position: relative;
         height: auto;
         -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
         box-sizing: border-box;
         padding: 10px;
         font-size: 16px;
@@ -45,30 +41,25 @@
 
     .form-signin input {
         margin-top: 10px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
     }
 
-    .has-error {
-        color: red;
+    .form-signin button {
+        margin-top: 10px;
+    }
+
+    .has-error{
+        color:red
     }
 </style>
 </html>
-
+<%-- compiled and minified CSS --%>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<%-- jQuery library --%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<%--compiled JavaScript --%>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<!--
-<nav class ="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="http://localhost:8080/">Skaiciuotuvas</a>
-        </div>
-        <ul class = "nav navbar-nav navbar-left">
-            <li class="active"><a href="/skaiciai">Atliktos operacijos</a></li>
-        </ul>
-    </div>
-</nav>
--->
 
